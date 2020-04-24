@@ -1,3 +1,13 @@
 <resources>
-	<string name="app_name">User Fetcher</string>
+    <string name="app_name">User Fetcher</string>
+    <string name="clear_data">Clear</string>
+    <string name="fetch_user">Fetch</string>
+    <string name="only_f">Only show females</string>
+    <string name="label_title">Title: %s</string>
+    <string name="label_fullname">Fullname: %s</string>
+    <string name="label_gender">Gender: %s</string>
+    <string name="label_dob">Date of birth: %s</string>
+    <string name="label_phone">Phone: %s</string>
+    <string name="label_email">Email: %s</string>
+    <string name="label_address">Address: %s</string>
 </resources>
