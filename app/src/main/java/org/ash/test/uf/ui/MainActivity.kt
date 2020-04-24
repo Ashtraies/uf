@@ -1,6 +1,7 @@
 package org.ash.test.uf.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -8,10 +9,10 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
 import org.ash.test.uf.R
-import org.ash.test.uf.util.UserGetter
 import org.ash.test.uf.ui.adapter.PagedUserAdapter
 import org.ash.test.uf.util.Logger
-import org.ashtray.uf.viewmodel.UserViewModel
+import org.ash.test.uf.util.UserGetter
+import org.ash.test.uf.viewmodel.UserViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,6 +36,10 @@ class MainActivity : AppCompatActivity() {
         fetch.setOnClickListener {
             try {
                 val number = number.text.toString().toInt()
+                if(number > 5000) {
+                    Toast.makeText(this,R.string.result_exceeds,Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
                 UserGetter().get(number) {
                     userViewModel.insert(it)
                 }

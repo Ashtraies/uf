@@ -1,10 +1,4 @@
-/*
- * User Fetcher 
- * org.ashtray.uf.viewmodel 
- * 
- * Created on 7/04/20 12:16 PM.
- */
-package org.ashtray.uf.viewmodel
+package org.ash.test.uf.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

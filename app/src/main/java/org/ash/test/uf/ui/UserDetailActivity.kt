@@ -8,7 +8,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.ash.test.uf.R
 import org.ash.test.uf.util.Constants
-import org.ashtray.uf.viewmodel.DetailViewModel
+import org.ash.test.uf.viewmodel.DetailViewModel
 
 
 class UserDetailActivity : AppCompatActivity() {

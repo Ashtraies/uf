@@ -10,4 +10,5 @@
     <string name="label_phone">Phone: %s</string>
     <string name="label_email">Email: %s</string>
     <string name="label_address">Address: %s</string>
+    <string name="result_exceeds">The max number of users can get is: 5000</string>
 </resources>
