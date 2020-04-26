@@ -33,7 +33,7 @@ class UserRepository(private val userDao: UserDao) {
         ).enqueue(handler)
     }
 
-    private fun convert(body: ResponseBody): List<User> {
+    private fun convert(body: ResponseBody): Users {
         val responseString: String = body.string()
         val json = JSONObject(responseString)
         val list = json.getJSONArray("results")
