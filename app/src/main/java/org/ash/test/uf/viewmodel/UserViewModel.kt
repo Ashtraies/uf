@@ -2,6 +2,7 @@ package org.ash.test.uf.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,11 +17,18 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = UserRepository(userDao)
 
-    fun usersByGender(gender: String?) = repository.getUserByGender(gender)
+    val gender = MutableLiveData<String>()
+
+    fun usersByGender() = repository.getUserByGender(gender.value)
+
+    fun usersFromApi(number: Int) =
+        repository.getUserFromApi(number) {
+            viewModelScope.launch { insert(it) }
+        }
 
     suspend fun dataCount() = repository.dataCount()
 
-    fun insert(user: Users) = viewModelScope.launch(Dispatchers.IO) {
+    private fun insert(user: Users) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(user)
     }
 

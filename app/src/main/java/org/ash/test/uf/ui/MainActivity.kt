@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 import org.ash.test.uf.R
 import org.ash.test.uf.ui.adapter.PagedUserAdapter
 import org.ash.test.uf.util.Logger
-import org.ash.test.uf.util.UserGetter
 import org.ash.test.uf.viewmodel.UserViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -40,9 +39,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this,R.string.result_exceeds,Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                UserGetter().get(number) {
-                    userViewModel.insert(it)
-                }
+                userViewModel.usersFromApi(number)
             } catch (e: NumberFormatException) {
                 Logger.L("${e.message}, return.")
                 return@setOnClickListener
@@ -55,24 +52,20 @@ class MainActivity : AppCompatActivity() {
                 Logger.L("Database has data.")
             } else {
                 Logger.L("No data, get 1000 users.")
-                UserGetter().get(1000) {
-                    userViewModel.insert(it)
-                }
+                userViewModel.usersFromApi(1000)
             }
         }
         showDefault(gender.isChecked)
     }
 
-    private fun observer(gender: String?) {
-        userViewModel.usersByGender(gender)
-            .observe(this, Observer {
-                adapter.submitList(it)
-                adapter.notifyDataSetChanged()
-            })
+    private fun observer() {
+        userViewModel.usersByGender()
+            .observe(this, Observer(adapter::submitList))
     }
 
     private fun showDefault(isChecked: Boolean) {
         val gender = if (isChecked) "female" else "male"
-        observer(gender)
+        userViewModel.gender.value = gender
+        observer()
     }
 }
