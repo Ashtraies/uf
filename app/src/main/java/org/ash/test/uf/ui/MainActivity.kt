@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
         fetch.setOnClickListener {
             try {
                 val number = number.text.toString().toInt()
-                if(number > 5000) {
-                    Toast.makeText(this,R.string.result_exceeds,Toast.LENGTH_SHORT).show()
+                if (number > 5000 || number <= 0) {
+                    Toast.makeText(this, R.string.result_range, Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
                 userViewModel.usersFromApi(number)
@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
                 userViewModel.usersFromApi(1000)
             }
         }
+        // start to observer, once get data, the UI will update.
         showDefault(gender.isChecked)
     }
 

@@ -16,6 +16,7 @@ import org.json.JSONObject
 class UserRepository(private val userDao: UserDao) {
 
     fun getUserByGender(gender: String?): PagedUsers {
+        Logger.L("Query gender: $gender")
         return userDao.getPagedUsersByGender(gender).toLiveData(
             Config(
                 pageSize = 20,
